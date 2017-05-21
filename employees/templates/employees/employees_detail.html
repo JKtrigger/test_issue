@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+​
+
+<div class="container">
+
+    <h2>{{ object.fullname }}</h2>
+        <h3>Отдел: {{ object.department }}</h3>
+
+
+        <form>
+        <div class="form-group">
+
+            <label for="Username">Username:</label>
+            <input type="text" class="form-control" id="Username"
+                    disabled value="{{object.username}}">
+            
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email"
+                    disabled value="{{object.email}}">
+
+            <label for="pwd">Password:</label>
+            <input type="password" disabled value="{{object.password}}"  
+                   class="form-control"
+                   id="pwd" >
+
+        </div>
+        </form>
+        <form class="form-inline">
+        <div class="form-group">
+
+            <label for="is_staff">is_staff :</label>
+            <input type="checkbox" disabled class="form-control" id="is_staff "
+                    disabled value="{{object.is_staff}}">
+            
+            <label for="is_active">is_active:</label>
+            <input type="checkbox" disabled class="form-control" id="is_active"
+                    disabled value="{{object.is_active}}">
+            <label for="is_superuser">is_superuser:</label>
+            <input type="checkbox" disabled class="form-control" id="is_superuser"
+                    disabled value="{{object.is_superuser}}">
+
+        </div>
+            <div>
+                 <label for="date_joined">date_joined:</label>
+
+            <input type="date" disabled value="{{object.date_joined}}"  class="form-control"
+                   id="date_joined" >
+            </div>
+
+        </form>
+    <form>
+        <div class="form-group">
+
+            <label for="object.position_display">Должность :</label>
+            <input type="text" disabled class="form-control" id="object.position_display"
+                    disabled value="{{object.position_display}}">
+
+            <label for="object.phone">Телефон:</label>
+            <input type="text" disabled class="form-control" id="object.phone"
+                    disabled value="{{object.phone|default:" Не указан " }}">
+
+            <label for="object.date_birth">Дата рождения:</label>
+            <input type="date" disabled class="form-control" id="object.date_birth"
+                    disabled value="{{object.date_birth}}">
+
+            <label for="object.employment_date">Дата приема на работу:</label>
+            <input type="date" disabled class="form-control" id="object.employment_date"
+                    disabled value="{{object.employment_date}}">
+
+            <label for="object.date_of_dismissal">Дата приема на работу:</label>
+            <input type="date" disabled class="form-control" id="object.date_of_dismissal"
+                    disabled value="{{object.date_of_dismissal|default:" _____________"}}">
+
+        </div>
+        </form>
+
+    <a href="/" class="btn btn-default">Назад</a>
+
+
+</div>
+
+​
+
+</body>
+
+</html>

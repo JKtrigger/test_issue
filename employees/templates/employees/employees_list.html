@@ -1,0 +1,102 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+{% load staticfiles %}
+
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<h1 class="text-center"> Список Сотрудников </h1>
+<div class="col-lg-12">
+    <div class="container text-center">
+        {% for group in groups %}
+
+        <button onclick="window.location.href='/?group_num={{forloop.counter0}}&is_active={{is_active}}&depart={{depart}}'" type="button" class="btn ">{{group}}</button>
+        {% endfor %}
+        <button onclick="window.location.href='/?group_num='" type="button" class="btn ">...</button>
+        <br>
+        <br>
+    </div>
+</div>
+    <div class="table-condensed">
+        <table class="table table-bordered table-hover table-striped tablesorter">
+            <thead>
+            <tr>
+                <th class="header">ФИО<i class="icon-sort"></i></th>
+                <th class="header">Отдел<i class="icon-sort"></i>
+                    <form action="" method="GET">
+                    <input type="text"
+                           value='{{depart}}' name="depart"/>
+                    </form>
+                </th>
+                <th class="header">Должность<i class="icon-sort"></i></th>
+                <th class="header">Телефон<i class="icon-sort"></i></th>
+                <th class="header">Дата рождения<i class="icon-sort"></i></th>
+                <th class="header">Дата приема на работу<i
+                        class="icon-sort"></i></th>
+                <th class="header">Дата увольнения<i class="icon-sort"></i>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle"
+                                type="button" data-toggle="dropdown">Фильтр
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/?is_active=True&depart={{depart}}">Работает</a></li>
+                            <li>
+                                <a href="/?is_active=False&depart={{depart}}">Уволен</a></li>
+                        </ul>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for object in object_list %}
+                <tr>
+                    <td><a href="/{{object.id}}">{{ object.fullname }}</a></td>
+                    <td>{{ object.department }}</td>
+                    <td>{{ object.position_display }}</td>
+                    <td>{{ object.phone|default:" Не указан " }}</td>
+                    <td>{{ object.date_birth }}</td>
+                    <td>{{ object.employment_date }}</td>
+                    <td>{{ object.date_of_dismissal|default:" _____________" }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <ul class="pagination">
+            {% if is_paginated %}
+
+
+                {% if page_obj.has_previous %}
+                    <li><a href="/?page={{ page_obj.previous_page_number }}&group_num={{group_num}}&is_active={{is_active}}&depart={{depart}}">Назад</a>
+                    </li>
+                {% endif %}
+
+                {% if page_obj|length >= 3 %}
+                    <li>
+                        <a href="/?page={{ page_obj.number }}&group_num={{group_num}}&is_active={{is_active}}&depart={{depart}}">{{ page_obj.number }}/{{ page_obj.paginator.num_pages }}</a>
+                    </li>
+                {% endif %}
+
+                {% if page_obj.has_next %}
+                    <li>
+                        <a href="/?page={{ page_obj.next_page_number }}&group_num={{group_num}}&is_active={{is_active}}&depart={{depart}}">Вперед</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+</body>
+
+</html>
